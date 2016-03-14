@@ -7,7 +7,12 @@ public class Student {
 	private int notes[];
 	private int id;
 	
+	public int getId() {
+		return id;
+	}
+
 	public Student(int id){
+		this.id = id;
 	}
 	
 	public String getFirstName() {
@@ -41,4 +46,28 @@ public class Student {
 	public void setNotes(int[] notes) {
 		this.notes = notes;
 	}	
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if (obj == null) {
+	        return false;
+	    }
+	    if (!Student.class.isAssignableFrom(obj.getClass())) {
+	        return false;
+	    }
+	    final Student other = (Student) obj;
+	    if ((this.firstName == null) ? (other.firstName != null) : !this.firstName.equals(other.firstName)) {
+	        return false;
+	    }
+	    if (this.lastName != other.lastName) {
+	        return false;
+	    }
+	    if (this.id != other.id) {
+	        return false;
+	    }
+	    if (this.speciality != other.speciality) {
+	        return false;
+	    }
+	    return true;
+	}
 }
