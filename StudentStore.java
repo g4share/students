@@ -1,5 +1,9 @@
 package com.endava.internship.student;
 
+import java.util.List;
+
 public interface StudentStore {
-	int[] getStudents();
+	List<Student> getStudents();
+	void add(Student student);	
+	void remove(Student student);
 }
