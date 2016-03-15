@@ -5,28 +5,30 @@ import java.util.List;
 import org.junit.Test;
 
 public class TestStudent {
-	StudentStorage storage = new StudentStorage();
+	private StudentStorage storage = new StudentStorage();
 	
 	@Test
 	public void testAdd(){
 		Student student = new Student(1);
 		storage.add(student);
 		List<Student> st = storage.getStudents();
-		assertEquals(st.size(), 1);
+		assertEquals(st.size(), 4);
 	}
 		
 	@Test
-	public void testAdd1(){
-		Student student1 = new Student(1);
-		Student student2 = new Student(1);
-		student1.setFirstName("John");
-		student1.setLastName("Crickk");
-		student1.setSpeciality("MA");
-		student2.setFirstName("John");
-		student2.setLastName("Crickk");
-		student2.setSpeciality("IA");
-		student1.equals(student2);
-		assertEquals(student1, student2);
+	public void testGetStudent(){
+		Student studentA = storage.getStudent(2);
+		Student studentB = new Student(2);
+		studentB.setFirstName("Charlie");
+		studentB.setLastName("Weasley");
+		studentB.setSpeciality("MA");
+		assertEquals(studentA, studentB);
+	}
+	
+	@Test
+	public void testGetUnexistingStudent(){
+		Student studentA = storage.getStudent(-1);
+		assertNull(studentA);
 	}
 	
 	@Test
@@ -36,6 +38,6 @@ public class TestStudent {
 		Student studentA = new Student(1);
 		storage.remove(studentA);
 		List<Student> st = storage.getStudents();
-		assertEquals(st.size(), 0);
+		assertEquals(st.size(), 3);
 	}
 }
