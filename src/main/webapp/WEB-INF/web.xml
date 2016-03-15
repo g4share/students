@@ -4,4 +4,24 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>TableServlet</servlet-name>
+  	<display-name>TableServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.endava.internship.servlet.TableServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>Table</servlet-name>
+  	<display-name>Table</display-name>
+  	<description></description>
+  	<servlet-class>com.endava.internship.servlet.TableServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>TableServlet</servlet-name>
+  	<url-pattern>/TableServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>Table</servlet-name>
+  	<url-pattern>/Table</url-pattern>
+  </servlet-mapping>
 </web-app>
