@@ -7,8 +7,13 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Internship Maven Webapp</name>
   <url>http://maven.apache.org</url>
-    <build>
+  <build>
     <plugins>
+      <plugin>
+  	    <groupId>org.jacoco</groupId>
+  	    <artifactId>jacoco-maven-plugin</artifactId>
+  	    <version>0.7.7-SNAPSHOT</version>
+	  </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -24,20 +29,20 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-		<version>4.12</version>
+	  <version>4.12</version>
       <scope>test</scope>
     </dependency>	
 	<dependency>
-  <groupId>javax.servlet</groupId>
-  <artifactId>servlet-api</artifactId>
-  <version>2.5</version>
-  <scope>provided</scope>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5</version>
+      <scope>provided</scope>
 	</dependency>
 	<dependency>
-  <groupId>javax.servlet.jsp</groupId>
-  <artifactId>jsp-api</artifactId>
-  <version>2.1</version>
-  <scope>provided</scope>
-</dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>jsp-api</artifactId>
+      <version>2.1</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 </project>
