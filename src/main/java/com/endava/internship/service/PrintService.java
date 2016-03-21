@@ -20,15 +20,18 @@ public class PrintService {
 			return ;
 		}
 		sb.append("<table><tr>")
-			.append("<th>ID</th><th>First Name</th><th>Last Name</th><th>Speciality</th>")
+			.append("<th>ID</th><th>First Name</th><th>Last Name</th>")
 			.append("</tr>");
 		for(Student st : students){
 			sb.append("<tr><td>")
 				.append(st.getId() + "</td><td>")
 				.append(st.getFirstName() + "</td><td>")
-				.append(st.getLastName() + "</td><td>") 
-				.append(st.getSpeciality() + "</td></tr>");
+				.append(st.getLastName() + "</td><td>");
 		}
 		sb.append("</table>");
+	}
+	public String showException(){
+		String string = "<html><head><title>TableServlet</title></head><body><p>Exception</p></body></html>";
+		return string;
 	}
 }
