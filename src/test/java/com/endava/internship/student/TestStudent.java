@@ -1,43 +1,37 @@
 package com.endava.internship.student;
 
 import static org.junit.Assert.*;
-import java.util.List;
+
+import java.io.IOException;
+import java.sql.SQLException;
 import org.junit.Test;
 
+import com.endava.internship.db.DbConection;
+import com.endava.internship.model.Student;
+import com.endava.internship.service.DbStudentsService;
+
 public class TestStudent {
-	private StudentStorage storage = new StudentStorage();
-	
+	private DbConection conn;
+	private DbStudentsService storage;
+
 	@Test
-	public void testAdd(){
-		Student student = new Student(1);
-		storage.add(student);
-		List<Student> st = storage.getStudents();
-		assertEquals(st.size(), 4);
-	}
-		
-	@Test
-	public void testGetStudent(){
+	public void testGetStudent() throws SQLException, ClassNotFoundException, IOException {
+		conn = new DbConection();
+		conn.init();
+		storage = new DbStudentsService(conn);
 		Student studentA = storage.getStudent(2);
 		Student studentB = new Student(2);
-		studentB.setFirstName("Charlie");
+		studentB.setFirstName("Bob");
 		studentB.setLastName("Weasley");
-		studentB.setSpeciality("MA");
 		assertEquals(studentA, studentB);
 	}
-	
+
 	@Test
-	public void testGetUnexistingStudent(){
+	public void testGetUnexistingStudent() throws SQLException, ClassNotFoundException, IOException {
+		conn = new DbConection();
+		conn.init();
+		storage = new DbStudentsService(conn);
 		Student studentA = storage.getStudent(-1);
 		assertNull(studentA);
-	}
-	
-	@Test
-	public void testRemove(){
-		Student student = new Student(1);
-		storage.add(student);
-		Student studentA = new Student(1);
-		storage.remove(studentA);
-		List<Student> st = storage.getStudents();
-		assertEquals(st.size(), 3);
 	}
 }
