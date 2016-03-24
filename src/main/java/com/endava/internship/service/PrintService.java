@@ -2,7 +2,7 @@ package com.endava.internship.service;
 
 import java.util.List;
 
-import com.endava.internship.student.Student;
+import com.endava.internship.model.Student;
 
 public class PrintService {
 	

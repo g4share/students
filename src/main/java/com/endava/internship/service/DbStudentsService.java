@@ -1,4 +1,4 @@
-package com.endava.internship.db;
+package com.endava.internship.service;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -7,29 +7,30 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.endava.internship.student.Student;
-import com.endava.internship.student.StudentStore;
+import com.endava.internship.db.DbConection;
+import com.endava.internship.model.Student;
 
-public class StudentStorageDB implements StudentStore {
+public class DbStudentsService implements StudentService {
 
-	private ConectionDB conn;
+	private DbConection conn;
 
-	public StudentStorageDB(ConectionDB conn) {
+	public DbStudentsService(DbConection conn) {
 		this.conn = conn;
 	}
 
 	public List<Student> getStudents() throws SQLException, ClassNotFoundException {
 		CallableStatement pstmt = conn.getConn().prepareCall("{call getStudents()}");
-		return getStudent(pstmt);
+		return getStudents(pstmt);
 	}
 
 	public Student getStudent(int id) throws SQLException {
 		PreparedStatement pstmt = conn.getConn().prepareStatement("SELECT * FROM studentstorage WHERE id=?");
-		List<Student> list = getStudent(pstmt);
+		pstmt.setInt(1, id);
+		List<Student> list = getStudents(pstmt);
 		return list == null || list.isEmpty() ? null : list.get(0);
 	}
 
-	public List<Student> getStudent(PreparedStatement pstmt) throws SQLException {
+	public List<Student> getStudents(PreparedStatement pstmt) throws SQLException {
 		List<Student> list = new ArrayList<>();
 
 		ResultSet rs = null;

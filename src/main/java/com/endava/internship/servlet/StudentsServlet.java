@@ -11,27 +11,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.endava.internship.db.ConectionDB;
-import com.endava.internship.db.StudentStorageDB;
+import com.endava.internship.db.DbConection;
+import com.endava.internship.model.Student;
+import com.endava.internship.service.DbStudentsService;
 import com.endava.internship.service.PrintService;
-import com.endava.internship.student.Student;
-import com.endava.internship.student.StudentStore;
+import com.endava.internship.service.StudentService;
 
 public class StudentsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private StudentStore storage;
+	private StudentService studentService;
 
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 
-		ConectionDB conn = new ConectionDB();
+		DbConection conn = new DbConection();
 		try {
 			conn.init();
-		} catch (ClassNotFoundException | SQLException | IOException e) {
+			studentService = new DbStudentsService(conn);
+		} catch (ClassNotFoundException 
+				| SQLException 
+				| IOException e) {
 			e.printStackTrace();
-			return;
 		}
-		storage = new StudentStorageDB(conn);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -43,12 +44,11 @@ public class StudentsServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		try {
-			students = storage.getStudents();
+			students = studentService.getStudents();
 			String html = printService.getHtml(students);
 			out.print(html);
 		} catch (Exception e) {
 			out.print(printService.showException());
-
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package com.endava.internship.student;
+package com.endava.internship.model;
 
 public class Student {
 	private String firstName;

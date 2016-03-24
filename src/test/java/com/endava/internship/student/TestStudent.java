@@ -2,49 +2,36 @@ package com.endava.internship.student;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
+import java.sql.SQLException;
 import org.junit.Test;
 
-import com.endava.internship.db.ConectionDB;
-import com.endava.internship.db.StudentStorageDB;
+import com.endava.internship.db.DbConection;
+import com.endava.internship.model.Student;
+import com.endava.internship.service.DbStudentsService;
 
 public class TestStudent {
-	private ConectionDB conn;
-	private StudentStore storage = new StudentStorageDB(conn);
-	
+	private DbConection conn;
+	private DbStudentsService storage;
+
 	@Test
-	public void testAdd() throws Exception{
-		/*Student student = new Student(1);
-		storage.add(student);
-		List<Student> st = new ArrayList<>();
-		st = storage.getStudents();
-		assertEquals(st.size(), 1);*/
-	}
-		
-	@Test
-	public void testGetStudent(){
-		/*Student studentA = storage.getStudent(2);
+	public void testGetStudent() throws SQLException, ClassNotFoundException, IOException {
+		conn = new DbConection();
+		conn.init();
+		storage = new DbStudentsService(conn);
+		Student studentA = storage.getStudent(2);
 		Student studentB = new Student(2);
-		studentB.setFirstName("Charlie");
+		studentB.setFirstName("Bob");
 		studentB.setLastName("Weasley");
-		studentB.setSpeciality("MA");
-		assertEquals(studentA, studentB);*/
+		assertEquals(studentA, studentB);
 	}
-	
+
 	@Test
-	public void testGetUnexistingStudent(){
-		/*Student studentA = storage.getStudent(-1);
-		assertNull(studentA);*/
-	}
-	
-	@Test
-	public void testRemove() throws Exception{
-		/*Student student = new Student(1);
-		storage.add(student);
-		Student studentA = new Student(1);
-		storage.remove(studentA);
-		List<Student> st = storage.getStudents();
-		assertEquals(st.size(), 3);*/
+	public void testGetUnexistingStudent() throws SQLException, ClassNotFoundException, IOException {
+		conn = new DbConection();
+		conn.init();
+		storage = new DbStudentsService(conn);
+		Student studentA = storage.getStudent(-1);
+		assertNull(studentA);
 	}
 }
