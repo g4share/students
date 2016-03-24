@@ -1,8 +1,12 @@
 language: java
 jdk:
   - oraclejdk7
+  
+  services:
+  - mysql
+  
 addons:
-  mariadb: '10.0'
+  mariadb: '10.1'
   
 install:
   - mvn package
